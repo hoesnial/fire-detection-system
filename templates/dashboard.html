@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fire Detection Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      main {
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+    <header class="bg-red-600 text-white py-4">
+      <div class="container mx-auto text-center">
+        <h1 class="text-3xl font-bold">Fire Detection Monitoring</h1>
+        <p class="text-sm mt-1">Real-time monitoring of environmental data</p>
+      </div>
+    </header>
+    <main class="container mx-auto py-8">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold">Sensor Data</h2>
+        <button
+          onclick="location.reload()"
+          class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+        >
+          Refresh Data
+        </button>
+      </div>
+      <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+        <table class="min-w-full border-collapse border border-gray-300">
+          <thead>
+            <tr class="bg-gray-200 text-gray-700 uppercase text-sm">
+              <th class="py-3 px-6 border">ID</th>
+              <th class="py-3 px-6 border">Timestamp</th>
+              <th class="py-3 px-6 border">Gas Status</th>
+              <th class="py-3 px-6 border">Fire Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for reading in readings %}
+            <tr class="hover:bg-gray-100">
+              <td class="py-3 px-6 border text-center">{{ reading[0] }}</td>
+              <td class="py-3 px-6 border text-center">{{ reading[1] }}</td>
+              <td class="py-3 px-6 border text-center">
+                {{ "Detected" if reading[2] else "Not Detected" }}
+              </td>
+              <td class="py-3 px-6 border text-center">
+                {{ "Detected" if reading[3] else "Not Detected" }}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <footer class="bg-gray-800 text-white py-4">
+      <div class="container mx-auto text-center">
+        <p class="text-sm">
+          © 2024 Fire Detection System | Developed by Kelompok 3
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
